@@ -54,9 +54,9 @@ void task4() {
 
 void task5(int argc, char* argv[]) {
     if (argc > 1) {
-#pragma omp parallel if(strcmp(argv[1], "parallel"))
+#pragma omp parallel if(!strcmp(argv[1], "parallel"))
         {
-            std::cout << "1\n";
+            std::cout << "Мой порядковый номер: " << omp_get_thread_num() << std::endl;
         }
     }
 }
@@ -64,12 +64,11 @@ void task5(int argc, char* argv[]) {
 #ifdef _OPENMP
 int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "");
+    task1();
+    task2();
+    task3();
+    task4();
     task5(argc, argv);
-//#pragma omp parallel
-//    {
-//    printf_s("Hello from %d of %d\n", omp_get_thread_num(), omp_get_num_procs());
-//    }
-    //return 1;
 }
 #endif
 
